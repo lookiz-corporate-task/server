@@ -53,7 +53,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-      run: sshpass -p $PASSWORD scp -P $PORT *.jar $USERNAME@$HOST:~/cicd
+      run: sshpass -p $PASSWORD scp -P $PORT lookiz-0.0.1-SNAPSHOT.jar $USERNAME@$HOST:~/cicd
       
     - name: SSH Remote Commands
       uses: appleboy/ssh-action@v0.1.4
@@ -65,4 +65,4 @@ jobs:
         timeout: 40s
         script:
           sudo fuser -k 8080/tcp |
-          sudo nohup java -jar ~/cicd/*.jar &
+          sudo nohup java -jar ~/cicd/lookiz-0.0.1-SNAPSHOT.jar &
