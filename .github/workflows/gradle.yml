@@ -46,6 +46,15 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: cicdsample
+    
+    - name: SCP transfer
+      env:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+      run: sshpass -p $PASSWORD scp -P $PORT *.jar $USERNAME@$HOST:~/cicd
+      
     - name: SSH Remote Commands
       uses: appleboy/ssh-action@v0.1.4
       with:
@@ -55,15 +64,5 @@ jobs:
         port: ${{ secrets.PORT }}
         timeout: 40s
         script:
-          echo "a remote control of girin"
-    - name: SCP transfer
-      env:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.PORT }}
-      run: sshpass -p $PASSWORD scp -P $PORT *.jar $USERNAME@$HOST:~/cicd
-    - name: Execute remote commands
-      run: |
-        ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} "sudo fuser -k 8080/tcp"
-        ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} "sudo nohup java -jar ~/cicd/*.jar &"
+          sudo fuser -k 8080/tcp |
+          sudo nohup java -jar ~/cicd/*.jar &
