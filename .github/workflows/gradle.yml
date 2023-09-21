@@ -59,7 +59,7 @@ jobs:
     - name: SCP transfer
       env:
         PORT: ${{ secrets.PORT }}
-      run: sshpass -p U8b!?%r7Ue scp -P $PORT *.jar ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~/cicd
+      run: sshpass -p ${{ secrets.PASSWORD }} scp -P $PORT *.jar ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~/cicd
     - name: Execute remote commands
       run: |
         ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} "sudo fuser -k 8080/tcp"
