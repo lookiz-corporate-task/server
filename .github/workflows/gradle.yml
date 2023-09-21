@@ -58,8 +58,11 @@ jobs:
           echo "a remote control of girin"
     - name: SCP transfer
       env:
-        PORT: ${{ secrets.PORT }}
-      run: sshpass -p ${{ secrets.PASSWORD }} scp -P $PORT *.jar ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~/cicd
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+      run: sshpass -p $PASSWORD scp -P $PORT *.jar $USERNAME@$HOST:~/cicd
     - name: Execute remote commands
       run: |
         ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} "sudo fuser -k 8080/tcp"
