@@ -57,7 +57,9 @@ jobs:
         script:
           echo "a remote control of girin"
     - name: SCP transfer
-      run: scp -P ${{ secrets.USERNAME }} *.jar ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~/cicd
+      env:
+        PORT: ${{ secrets.USERNAME }}
+      run: scp -P $PORT *.jar ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~/cicd
     - name: Execute remote commands
       run: |
         ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} "sudo fuser -k 8080/tcp"
