@@ -69,5 +69,5 @@ jobs:
         port: ${{ secrets.PORT }}
         timeout: 40s
         script:
-          sudo fuser -k 8080/tcp || echo "No process is using port 8080"
+          sudo fuser -k 8080/tcp
           sudo nohup java -jar ~/cicd/lookiz-0.0.1-SNAPSHOT.jar > output.log 2> nohup.err < /dev/null &
