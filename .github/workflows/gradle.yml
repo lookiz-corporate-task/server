@@ -58,7 +58,7 @@ jobs:
           echo "a remote control of girin"
     - name: SCP transfer
       env:
-        PORT: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
       run: scp -P $PORT *.jar ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~/cicd
     - name: Execute remote commands
       run: |
