@@ -86,7 +86,7 @@ public class PostService {
         }
 
         for (PostEntity post : allPosts) {
-            PostResponseDto responseDto = new PostResponseDto(post);
+            PostResponseDto responseDto = new PostResponseDto(post, foundUser.getNickname());
             responseDto.setLiked(likeRepository.findByPostIdAndUserId(post.getId(), foundUser.getId()) != null);
             postResponseDtos.add(responseDto);
         }
