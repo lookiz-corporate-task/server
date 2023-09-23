@@ -43,7 +43,7 @@ public class PostEntity {
     private List<LikeEntity> likeList = new ArrayList<>();
 
     public PostEntity(PostRequestDto postRequestDto, Date timestamp) {
-        this.instaId = postRequestDto.getInstaId();
+        this.instaId = postRequestDto.getUsername();
         this.username = postRequestDto.getUsername();
         this.timestamp = timestamp;
         this.mediaUrl = postRequestDto.getMediaUrl();
