@@ -18,14 +18,14 @@ public class AuthorizeController {
     @GetMapping("/instagram")
     public ResponseEntity<InstagramToken> integration(
             @RequestHeader(value = "Host") String host,
-            @RequestHeader(value = "X-Forwarded-Proto", required = false, defaultValue = "http") String protocol,
+            @RequestHeader(value = "X-Forwarded-Proto", required = false, defaultValue = "https") String protocol,
             @RequestParam String code
     ){
         String baseUrl = protocol + "://" + host;
         String redirectUri = baseUrl + "/authorize/instagram";
 
         InstagramToken token = instagramService.getInstagramToken(code, redirectUri);
-        
+
         return ResponseEntity.ok().body(token);
     }
 }
