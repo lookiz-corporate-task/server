@@ -24,17 +24,17 @@ public class PostController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PostResponseDto>> getAllPosts(@RequestBody String email) {
+    public ResponseEntity<List<PostResponseDto>> getAllPosts(@RequestHeader(value = "Authorization") String email) {
         return postService.getAllPosts(email);
     }
 
     @GetMapping("/rank")
-    public ResponseEntity<List<PostResponseDto>> getTop10Posts(@RequestBody String email) {
+    public ResponseEntity<List<PostResponseDto>> getTop10Posts(@RequestHeader(value = "Authorization") String email) {
         return postService.getTop10Posts(email);
     }
 
     @GetMapping("/my")
-    public ResponseEntity<List<PostResponseDto>> getAllMy(@RequestBody String email) {
+    public ResponseEntity<List<PostResponseDto>> getAllMy(@RequestHeader(value = "Authorization") String email) {
         return postService.getAllMy(email);
     }
 
