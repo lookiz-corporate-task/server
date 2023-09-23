@@ -26,7 +26,7 @@ public class PostResponseDto {
         this.username = post.getUsername();
         this.timestamp = post.getTimestamp();
         this.mediaUrl = post.getMediaUrl();
-        this.likeCount = post.getLikeList().size();
+        //this.likeCount = post.getLikeList().size();
         this.isLiked = false;
     }
 
