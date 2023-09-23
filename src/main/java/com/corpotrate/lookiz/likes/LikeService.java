@@ -29,10 +29,7 @@ public class LikeService {
                 .orElseThrow(() -> new IllegalArgumentException("게시물이 존재하지 않습니다."));
 
         UserEntity foundUser = userRepository.findByEmail(email);
-        if (foundPost.getUser().getId() == foundUser.getId()) {
-            throw new IllegalArgumentException("본인 작성한 글은 좋아요 할 수 없습니다.");
-        }
-
+        
         //이미 좋아요를 했다면
         if (likeRepository.findByPostIdAndUserId(postId, foundUser.getId()) != null) {
             throw new IllegalArgumentException("이미 좋아요 등록이 되었습니다.");
