@@ -24,14 +24,14 @@ public class PostResponseDto {
 
     private boolean isLiked;
 
-    public PostResponseDto(PostEntity post,String nickname) {
+    public PostResponseDto(PostEntity post, String nickname, Long userId) {
         this.id = post.getId();
         this.nickname = nickname;
         this.username = post.getUsername();
         this.timestamp = post.getTimestamp();
         this.mediaUrl = post.getMediaUrl();
-        //this.likeCount = post.getLikeList().size();
-        this.isLiked = false;
+        this.likeCount = post.getLikeList().size();
+        this.isLiked = post.getLikeList().stream().map((p) -> p.getUser()).filter((user) -> user.getId().equals(userId)).findAny().isPresent();
     }
 
     public void setLiked(boolean liked) {

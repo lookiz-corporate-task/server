@@ -39,7 +39,7 @@ public class PostEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "post")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "post", fetch = FetchType.EAGER)
     private List<LikeEntity> likeList = new ArrayList<>();
 
     public PostEntity(PostRequestDto postRequestDto, Date timestamp) {

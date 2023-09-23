@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -21,8 +22,6 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
-    private final LikeRepository likeRepository;
-
 
     public void postsFromInsta(PostRequestDto postRequestDto) {
         String UTCTime = postRequestDto.getTimestamp();
@@ -37,58 +36,43 @@ public class PostService {
     }
 
     public ResponseEntity<List<PostResponseDto>> getAllPosts(String email) {
-
         UserEntity foundUser = userRepository.findByEmail(email);
-
-        List<PostResponseDto> postResponseDtos = new ArrayList<>();
 
         List<PostEntity> allPosts = postRepository.findAllByOrderByTimestampDesc();
 
-        return getListResponseEntity(postResponseDtos, foundUser, allPosts);
+        List<PostResponseDto> postResponseDtos = allPosts.stream()
+                .map((post) -> new PostResponseDto(post, post.getUsername(), foundUser.getId()))
+                .collect(Collectors.toList());;
+
+        return ResponseEntity.ok().body(postResponseDtos);
 
     }
 
     public ResponseEntity<List<PostResponseDto>> getTop10Posts(String email) {
-
-        List<PostResponseDto> postResponseDtos = new ArrayList<>();
-
         UserEntity foundUser = userRepository.findByEmail(email);
 
         List<PostEntity> allPosts = postRepository.findTop10ByOrderByLikeListDesc();
 
-        return getListResponseEntity(postResponseDtos, foundUser, allPosts);
+        List<PostResponseDto> postResponseDtos = allPosts.stream()
+                .map((post) -> new PostResponseDto(post, post.getUsername(), foundUser.getId()))
+                .collect(Collectors.toList());;
 
+        return ResponseEntity.ok().body(postResponseDtos);
     }
 
     public ResponseEntity<List<PostResponseDto>> getAllMy(String email) {
-
-        List<PostResponseDto> postResponseDtos = new ArrayList<>();
-
         UserEntity foundUser = userRepository.findByEmail(email);
+
         if (foundUser == null || foundUser.getInstaId() == null) {
             return ResponseEntity.badRequest().body(null);
         }
 
         List<PostEntity> allPosts = postRepository.findAllByInstaId(foundUser.getInstaId());
 
-        return getListResponseEntity(postResponseDtos, foundUser, allPosts);
-
-    }
-
-    private ResponseEntity<List<PostResponseDto>> getListResponseEntity(List<PostResponseDto> postResponseDtos, UserEntity foundUser, List<PostEntity> allPosts) {
-
-        if (allPosts == null) {
-            return ResponseEntity.badRequest().body(null);
-        }
-
-        for (PostEntity post : allPosts) {
-            PostResponseDto responseDto = new PostResponseDto(post, foundUser.getNickname());
-            responseDto.setLiked(likeRepository.findByPostIdAndUserId(post.getId(), foundUser.getId()) != null);
-            postResponseDtos.add(responseDto);
-        }
+        List<PostResponseDto> postResponseDtos = allPosts.stream()
+                .map((post) -> new PostResponseDto(post, post.getUsername(), foundUser.getId()))
+                .collect(Collectors.toList());;
 
         return ResponseEntity.ok().body(postResponseDtos);
-
     }
-
 }
