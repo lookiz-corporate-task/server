@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PostRequestDto {
 
-    @JsonProperty("id")
     private String instaId;
 
     private String username;
