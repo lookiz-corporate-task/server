@@ -1,5 +1,6 @@
 package com.corpotrate.lookiz.apis;
 
+import com.corpotrate.lookiz.apis.dto.ZapierResDto;
 import com.corpotrate.lookiz.posts.PostService;
 import com.corpotrate.lookiz.posts.dto.PostRequestDto;
 import com.corpotrate.lookiz.posts.dto.PostResponseDto;
@@ -17,8 +18,9 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping
-    public void postsFromInsta(@RequestBody List<PostRequestDto> postRequestDtos) {
-        postService.postsFromInsta(postRequestDtos);
+    public ZapierResDto postsFromInsta(@RequestBody PostRequestDto postRequestDto) {
+        postService.postsFromInsta(postRequestDto);
+        return new ZapierResDto("success");
     }
 
     @GetMapping

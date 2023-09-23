@@ -24,20 +24,16 @@ public class PostService {
     private final LikeRepository likeRepository;
 
 
-    public void postsFromInsta(List<PostRequestDto> postRequestDtos) {
-
-        for (PostRequestDto postRequestDto : postRequestDtos) {
-            String UTCTime = postRequestDto.getTimestamp();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-            try {
-                Date date = dateFormat.parse(UTCTime);
-                PostEntity post = new PostEntity(postRequestDto, date);
-                postRepository.save(post);
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
+    public void postsFromInsta(PostRequestDto postRequestDto) {
+        String UTCTime = postRequestDto.getTimestamp();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        try {
+            Date date = dateFormat.parse(UTCTime);
+            PostEntity post = new PostEntity(postRequestDto, date);
+            postRepository.save(post);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
-
     }
 
     public ResponseEntity<List<PostResponseDto>> getAllPosts(String email) {
