@@ -29,7 +29,7 @@ public class PostEntity {
     @Column
     private Date timestamp;
 
-    @Column(unique = true)
+    @Column(columnDefinition = "TEXT", unique = true)
     private String mediaUrl;
 
     @Column
