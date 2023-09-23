@@ -69,7 +69,7 @@ jobs:
         port: ${{ secrets.PORT }}
         timeout: 40s
         script:
-          sudo fuser -k 8080/tcp || echo "No process is using port 8080"
+          sudo fuser -k 443/tcp || echo "No process is using port 443"
           
           sleep 3
           
