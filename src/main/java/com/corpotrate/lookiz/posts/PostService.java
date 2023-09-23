@@ -24,11 +24,13 @@ public class PostService {
     private final UserRepository userRepository;
 
     public void postsFromInsta(PostRequestDto postRequestDto) {
+        System.out.println(postRequestDto);
         String UTCTime = postRequestDto.getTimestamp();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
         try {
             Date date = dateFormat.parse(UTCTime);
             PostEntity post = new PostEntity(postRequestDto, date);
+            System.out.println(post);
             postRepository.save(post);
         } catch (ParseException e) {
             throw new RuntimeException(e);

@@ -48,4 +48,17 @@ public class PostEntity {
         this.timestamp = timestamp;
         this.mediaUrl = postRequestDto.getMediaUrl();
     }
+
+    @Override
+    public String toString() {
+        return "PostEntity{" +
+                "id=" + id +
+                ", instaId='" + instaId + '\'' +
+                ", timestamp=" + timestamp +
+                ", mediaUrl='" + mediaUrl + '\'' +
+                ", username='" + username + '\'' +
+                ", user=" + user +
+                ", likeList=" + likeList +
+                '}';
+    }
 }
