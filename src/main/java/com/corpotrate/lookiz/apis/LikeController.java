@@ -15,11 +15,13 @@ public class LikeController {
 
     @PostMapping("/{postId}")
     public ResponseEntity<HttpStatus> createLike(@PathVariable Long postId, @RequestHeader(value = "Authorization") String email) {
+        System.out.println(email);
         return likeService.createLike(postId, email);
     }
 
     @DeleteMapping("/{postId}")
     public ResponseEntity<HttpStatus> deleteLike(@PathVariable Long postId, @RequestHeader(value = "Authorization") String email) {
+        System.out.println(email);
         return likeService.deleteLike(postId, email);
     }
 
