@@ -58,3 +58,44 @@
 * **빌드 프로세스 혹은 외부 의존성 변경** :
   * 접두어: `setting:`
   * 예: **`setting: update webpack configuration`**
+
+## **How To Run**
+
+### **1. applocation.properties 파일 설정하기**
+
+```javascript
+app.version=1.0.5
+
+// DB Connection Setting
+spring.datasource.url='db server url'
+spring.datasource.username='db username'
+spring.datasource.password='db password'
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+// Hibernate Setting
+spring.jpa.generate-ddl=false
+spring.jpa.show-sql=false
+spring.jpa.database=mysql
+spring.jpa.database-platform=org.hibernate.dialect.MySQL5InnoDBDialect
+spring.jpa.properties.hibernate.format_sql=true
+
+// HTTPS Setting
+server.ssl.key-store='keystore path'
+server.key-store-stype='key store stye'
+server.ssl.key-store-password='key store password'
+server.ssl.key-alias='key alias
+
+server.port='https port'
+
+```
+
+### **2. 실행하기**
+```javascript
+// Build
+
+./gradlew build
+
+// Start
+
+./gradlew bootRun
+```
