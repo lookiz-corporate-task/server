@@ -1,9 +1,13 @@
 package com.corpotrate.lookiz.posts.dto;
 
 import com.corpotrate.lookiz.posts.PostEntity;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+@Getter
+@NoArgsConstructor
 public class PostResponseDto {
 
     private Long id;
