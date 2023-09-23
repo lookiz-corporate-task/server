@@ -36,10 +36,10 @@ public class PostEntity {
     private String username;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID")
+    @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "post")
     private List<LikeEntity> likeList = new ArrayList<>();
 
     public PostEntity(PostRequestDto postRequestDto, Date timestamp) {
