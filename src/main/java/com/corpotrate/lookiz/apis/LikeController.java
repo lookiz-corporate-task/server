@@ -14,12 +14,12 @@ public class LikeController {
     private final LikeService likeService;
 
     @PostMapping("/{postId}")
-    public ResponseEntity<HttpStatus> createLike(@PathVariable Long postId, @RequestBody String email) {
+    public ResponseEntity<HttpStatus> createLike(@PathVariable Long postId, @RequestHeader(value = "Authorization") String email) {
         return likeService.createLike(postId, email);
     }
 
     @DeleteMapping("/{postId}")
-    public ResponseEntity<HttpStatus> deleteLike(@PathVariable Long postId, @RequestBody String email) {
+    public ResponseEntity<HttpStatus> deleteLike(@PathVariable Long postId, @RequestHeader(value = "Authorization") String email) {
         return likeService.deleteLike(postId, email);
     }
 
