@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 public class PostRequestDto {
 
     @JsonProperty("id")
-    private Long instaId;
+    private String instaId;
 
     private String username;
 

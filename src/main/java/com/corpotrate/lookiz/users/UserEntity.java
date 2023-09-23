@@ -28,8 +28,8 @@ public class UserEntity {
     @Column
     private String nickname;
 
-    @Column(columnDefinition = "BIGINT DEFAULT 0")
-    private Long instaId;
+    @Column()
+    private String instaId;
 
     public UserEntity(UserRequestDto requestDto) {
         this.email = requestDto.getEmail();
@@ -38,6 +38,6 @@ public class UserEntity {
     }
 
     public void connectInsta(InstaRequestDto instaRequestDto) {
-        this.instaId = instaRequestDto.getInstaId();
+        this.instaId = "6161kim61";
     }
 }

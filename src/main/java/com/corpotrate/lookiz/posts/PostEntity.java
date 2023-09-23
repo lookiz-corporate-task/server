@@ -24,7 +24,7 @@ public class PostEntity {
     private Long id;
 
     @Column(unique = true)
-    private Long instaId;
+    private String instaId;
 
     @Column
     private Date timestamp;

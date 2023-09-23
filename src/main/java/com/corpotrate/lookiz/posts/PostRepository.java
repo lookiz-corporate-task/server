@@ -10,5 +10,5 @@ public interface PostRepository extends JpaRepository<PostEntity, Long> {
 
     List<PostEntity> findTop10ByOrderByLikeListDesc();
 
-    List<PostEntity> findAllByInstaId(Long instaId);
+    List<PostEntity> findAllByInstaId(String instaId);
 }

@@ -9,6 +9,6 @@ public class InstaRequestDto {
 
     private String email;
 
-    private Long instaId;
+    private String instaId;
 
 }
