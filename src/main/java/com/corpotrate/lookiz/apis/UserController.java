@@ -1,5 +1,6 @@
-package com.corpotrate.lookiz.users;
+package com.corpotrate.lookiz.apis;
 
+import com.corpotrate.lookiz.users.UserService;
 import com.corpotrate.lookiz.users.dto.InstaRequestDto;
 import com.corpotrate.lookiz.users.dto.UserRequestDto;
 import com.corpotrate.lookiz.users.dto.UserResponseDto;
