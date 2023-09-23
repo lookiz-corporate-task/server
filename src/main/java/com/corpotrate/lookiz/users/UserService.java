@@ -1,6 +1,7 @@
 package com.corpotrate.lookiz.users;
 
 import com.corpotrate.lookiz.users.dto.InstaRequestDto;
+import com.corpotrate.lookiz.users.dto.LoginRequestDto;
 import com.corpotrate.lookiz.users.dto.UserRequestDto;
 import com.corpotrate.lookiz.users.dto.UserResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -30,14 +31,14 @@ public class UserService {
     }
 
 
-    public ResponseEntity<String> signin(UserRequestDto userRequestDto) {
-        UserEntity foundUser = userRepository.findByEmail(userRequestDto.getEmail());
+    public ResponseEntity<String> signin(LoginRequestDto loginRequestDto) {
+        UserEntity foundUser = userRepository.findByEmail(loginRequestDto.getEmail());
         if (foundUser == null) {
             throw new ResponseStatusException(HttpStatus.valueOf(409), "유저가 존재하지 않습니다");
         }
 
-        if ((foundUser.getEmail().equals(userRequestDto.getEmail())) &&
-                ((foundUser.getPassword().equals(userRequestDto.getPassword())))) {
+        if ((foundUser.getEmail().equals(loginRequestDto.getEmail())) &&
+                ((foundUser.getPassword().equals(loginRequestDto.getPassword())))) {
             return ResponseEntity.ok().body("success");
         } else {
             return ResponseEntity.badRequest().body("fail");

@@ -2,6 +2,7 @@ package com.corpotrate.lookiz.apis;
 
 import com.corpotrate.lookiz.users.UserService;
 import com.corpotrate.lookiz.users.dto.InstaRequestDto;
+import com.corpotrate.lookiz.users.dto.LoginRequestDto;
 import com.corpotrate.lookiz.users.dto.UserRequestDto;
 import com.corpotrate.lookiz.users.dto.UserResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,8 @@ public class UserController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<String> signin(@RequestBody UserRequestDto userRequestDto) {
-        return userService.signin(userRequestDto);
+    public ResponseEntity<String> signin(@RequestBody LoginRequestDto loginRequestDto) {
+        return userService.signin(loginRequestDto);
     }
 
     @PostMapping("/connect")
