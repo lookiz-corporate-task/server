@@ -48,9 +48,9 @@ public class LikeService {
 
         UserEntity foundUser = userRepository.findByEmail(email);
 
-        Long likeId = likeRepository.findByPostIdAndUserId(foundPost.getId(), foundUser.getId());
+        LikeEntity like = likeRepository.findByPostIdAndUserId(foundPost.getId(), foundUser.getId());
 
-        likeRepository.deleteById(likeId);
+        likeRepository.delete(like);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

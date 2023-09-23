@@ -1,6 +1,7 @@
 package com.corpotrate.lookiz.posts;
 
-import com.corpotrate.lookiz.likes.LikeRepository;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import com.corpotrate.lookiz.posts.dto.PostRequestDto;
 import com.corpotrate.lookiz.posts.dto.PostResponseDto;
 import com.corpotrate.lookiz.users.UserEntity;
@@ -53,7 +54,8 @@ public class PostService {
     public ResponseEntity<List<PostResponseDto>> getTop10Posts(String email) {
         UserEntity foundUser = userRepository.findByEmail(email);
 
-        List<PostEntity> allPosts = postRepository.findTop10ByOrderByLikeListDesc();
+        Pageable topTen = PageRequest.of(0, 10);
+        List<PostEntity> allPosts = postRepository.findTop10DistinctPosts(topTen);
 
         List<PostResponseDto> postResponseDtos = allPosts.stream()
                 .map((post) -> new PostResponseDto(post, post.getUsername(), foundUser.getId()))
