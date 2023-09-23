@@ -1,5 +1,6 @@
 package com.corpotrate.lookiz.users;
 
+import com.corpotrate.lookiz.users.dto.InstaRequestDto;
 import com.corpotrate.lookiz.users.dto.UserRequestDto;
 import com.corpotrate.lookiz.users.dto.UserResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +17,8 @@ public class UserService {
 
     public ResponseEntity<UserResponseDto> signup(UserRequestDto userRequestDto) {
 
-        UserEntity checkUser = userRepository.findByEmail(userRequestDto.getEmail());
-        if (checkUser != null) {
+        UserEntity foundUser = userRepository.findByEmail(userRequestDto.getEmail());
+        if (foundUser != null) {
             throw new ResponseStatusException(HttpStatus.valueOf(409), "중복된 이메일이 존재합니다");
         }
 
@@ -30,17 +31,28 @@ public class UserService {
 
 
     public ResponseEntity<String> signin(UserRequestDto userRequestDto) {
-        UserEntity checkUser = userRepository.findByEmail(userRequestDto.getEmail());
-        if (checkUser == null) {
+        UserEntity foundUser = userRepository.findByEmail(userRequestDto.getEmail());
+        if (foundUser == null) {
             throw new ResponseStatusException(HttpStatus.valueOf(409), "유저가 존재하지 않습니다");
         }
 
-        if ((checkUser.getEmail().equals(userRequestDto.getEmail())) &&
-                ((checkUser.getPassword().equals(userRequestDto.getPassword())))) {
+        if ((foundUser.getEmail().equals(userRequestDto.getEmail())) &&
+                ((foundUser.getPassword().equals(userRequestDto.getPassword())))) {
             return ResponseEntity.ok().body("success");
         } else {
             return ResponseEntity.badRequest().body("fail");
         }
+    }
+
+    public ResponseEntity<String> connectInsta(InstaRequestDto instaRequestDto) {
+        UserEntity foundUser = userRepository.findByEmail(instaRequestDto.getEmail());
+        if (foundUser == null) {
+            throw new ResponseStatusException(HttpStatus.valueOf(409), "유저가 존재하지 않습니다");
+        }
+
+        foundUser.connectInsta(instaRequestDto);
+        userRepository.save(foundUser);
+        return ResponseEntity.ok().body("success");
     }
 
 }

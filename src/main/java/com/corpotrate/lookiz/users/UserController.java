@@ -1,13 +1,11 @@
 package com.corpotrate.lookiz.users;
 
+import com.corpotrate.lookiz.users.dto.InstaRequestDto;
 import com.corpotrate.lookiz.users.dto.UserRequestDto;
 import com.corpotrate.lookiz.users.dto.UserResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RequestMapping("/users")
@@ -24,6 +22,11 @@ public class UserController {
     @PostMapping("/signin")
     public ResponseEntity<String> signin(@RequestBody UserRequestDto userRequestDto) {
         return userService.signin(userRequestDto);
+    }
+
+    @PostMapping("/connect")
+    public ResponseEntity<String> connectInsta(@RequestBody InstaRequestDto instaRequestDto) {
+        return userService.connectInsta(instaRequestDto);
     }
 
 

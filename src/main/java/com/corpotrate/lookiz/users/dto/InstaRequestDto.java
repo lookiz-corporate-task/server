@@ -5,12 +5,10 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class UserRequestDto {
+public class InstaRequestDto {
 
     private String email;
 
-    private String password;
-
-    private String nickname;
+    private Long instaId;
 
 }
